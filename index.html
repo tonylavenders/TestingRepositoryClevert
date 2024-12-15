@@ -417,7 +417,7 @@
       };
     </script>
 
-  <script>
+ <script>
   // Function to show the custom pop-up
   function showCustomPopup() {
     const userConsent = confirm("Do you allow notifications?"); // Replace with a styled custom pop-up if needed
@@ -430,19 +430,17 @@
 
   // Function to trigger CleverTap permission request
   function requestCleverTapPermission() {
-    Notification.requestPermission().then(function (getperm) {
-      if (getperm === "granted") {
-        console.log("CleverTap Notification Permission granted:", getperm);
-        clevertap.notifications.push({
-          "titleText": "Notification Permissions",
-          "bodyText": "Allow notifications to stay updated.",
-          "okButtonText": "Allow",
-          "rejectButtonText": "No thanks",
-          "askAgainTimeInSeconds": 5,
-        });
-      } else {
-        console.log("CleverTap Notification Permission denied:", getperm);
-      }
+    clevertap.notifications.push({
+      "titleText": "Would you like to receive notifications?",
+      "bodyText": "We’d like to send you notifications for the latest updates.",
+      "okButtonText": "Allow",
+      "rejectButtonText": "No Thanks",
+      "okCallback": function () {
+        console.log("CleverTap Notifications Permission Granted");
+      },
+      "rejectCallback": function () {
+        console.log("CleverTap Notifications Permission Denied");
+      },
     });
   }
 
@@ -451,6 +449,7 @@
     showCustomPopup();
   };
 </script>
+
 
    
 
