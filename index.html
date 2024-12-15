@@ -417,41 +417,28 @@
       };
     </script>
 
- <script>
-  // Function to show the custom pop-up
-  function showCustomPopup() {
-    const userConsent = confirm("Do you allow notifications?"); // Replace with a styled custom pop-up if needed
-    if (userConsent) {
-      requestCleverTapPermission();
-    } else {
-      console.log("User denied custom notification permission.");
-    }
-  }
+    <!-- Notification Push javascript file -->
+    <!--     <script data-main="config/config" src="/notificationPush.js"></script> -->
+    <script src="notificationPush.js"></script>
 
-  // Function to trigger CleverTap permission request
-  function requestCleverTapPermission() {
-    clevertap.notifications.push({
-      "titleText": "Would you like to receive notifications?",
-      "bodyText": "We’d like to send you notifications for the latest updates.",
-      "okButtonText": "Allow",
-      "rejectButtonText": "No Thanks",
-      "okCallback": function () {
-        console.log("CleverTap Notifications Permission Granted");
-      },
-      "rejectCallback": function () {
-        console.log("CleverTap Notifications Permission Denied");
-      },
-    });
-  }
-
-  // Initialize custom pop-up first
-  window.onload = function () {
-    showCustomPopup();
-  };
-</script>
-
-
-   
+    <!-- Hard Popup Button -->
+    <!-- <br /><br />
+    <button id="testBtn" onclick="testButton()">Hard Popup Button</button>
+    <div class="snackbar" id="sb7">Hard Popup Button Clicked!</div>
+    <script>
+      let testButton = () => {
+        Notification.requestPermission().then(function (getperm) {
+          console.log("Hard Popup Permission granted", getperm);
+          window.location.reload();
+        });
+      };
+      //snackbar
+      var x = document.getElementById("sb7");
+      x.classList.add("show");
+      setTimeout(function () {
+        x.className = x.className.replace("show1", "");
+      }, 3000);
+    </script> -->
 
     <!-- Cart -->
     <br /><br />
