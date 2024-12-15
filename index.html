@@ -1,13 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Page</title>
-</head>
-<body>
-    <h1>Welcome to My GitHub Page</h1>
-    <img src="assets/screen.png" alt="Description of the image" style="width:50%;max-width:600px;">
-</body>
-</html>
+  <head>
+    <!-- Google Tag Manager -->
+    <!-- <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dlk = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-MQ89K3M");
+    </script> -->
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDK Integration Test</title>
 
+    <!-- require.js wrapper -->
+    <!-- <script data-main="config/config" src="./scripts/require.js"></script>
+    <script>
+      require(["config"], function () {
+        require(["jqueryFile", "clevertapFile"]);
+      });
+    </script> -->
+
+    <script type="text/javascript">
+      var clevertap = {
+        event: [],
+        profile: [],
+        account: [],
+        onUserLogin: [],
+        notifications: [],
+        privacy: [],
+      };
+      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+      clevertap.account.push({ id: "W8W-6WR-846Z" });
+      // clevertap.account.push({ id: "4W5-Z45-KZ6Z" });
+      // clevertap.account.push({ id: "4W9-K46-566Z" });
+      clevertap.enablePersonalization = false; //Enables Personalization
+      clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
+      clevertap.privacy.push({ useIP: false }); //set the flag to true, if the user agrees to share their IP data
+      (function () {
+        var wzrk = document.createElement("script");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+        wzrk.src =
+          ("https:" == document.location.protocol
+            ? "https://d2r1yp2w7bby2u.cloudfront.net"
+            : "http://static.clevertap.com") + "/js/clevertap.min.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+      clevertap.dismissSpamControl = true;
+    </script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics.js";
+      import {} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-messaging.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyArhCWNBdEiXR_r9iVdPZ9kegtO1NQMecs",
+        authDomain: "integrationsdk-test.firebaseapp.com",
+        projectId: "integrationsdk-test",
+        storageBucket: "integrationsdk-test.appspot.com",
+        messagingSenderId: "487275975172",
+        appId: "1:487275975172:web:f5f011d0bf81884daf9b51",
+        measurementId: "G-Q8KZC85TXF",
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      console.log(app.options);
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <script>
+      function closePopUp() {
+        var overlay = window.parent.document.getElementById("intentOpacityDiv");
+        var wrapper = window.parent.document.getElementById("intentPreview");
+        overlay.remove();
+        wrapper.remove();
+      }
+    </script>
+
+    <!-- Segment -->
+    <!-- <script>
+      !(function () {
+        var analytics = (window.analytics = window.analytics || []);
+        if (!analytics.initialize)
+          if (analytics.invoked)
+            window.console &&
+              console.error &&
+              console.error("Segment snippet included twice.");
+          else {
+            analytics.invoked = !0;
+            analytics.methods = [
+              "trackSubmit",
+              "trackClick",
+              "trackLink",
+              "trackForm",
+              "pageview",
+              "identify",
+              "reset",
+              "group",
+              "track",
+              "ready",
+              "alias",
+              "debug",
+              "page",
+              "once",
+              "off",
+              "on",
+              "addSourceMiddleware",
+              "addIntegrationMiddleware",
+              "setAnonymousId",
+              "addDestinationMiddleware",
+            ];
+            analytics.factory = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                t.unshift(e);
+                analytics.push(t);
+                return analytics;
+              };
+            };
+            for (var e = 0; e < analytics.methods.length; e++) {
+              var key = analytics.methods[e];
+              analytics[key] = analytics.factory(key);
+            }
+            analytics.load = function (key, e) {
+              var t = document.createElement("script");
+              t.type = "text/javascript";
+              t.async = !0;
+              t.src =
+                "https://cdn.segment.com/analytics.js/v1/" +
+                key +
+                "/analytics.min.js";
+              var n = document.getElementsByTagName("script")[0];
+              n.parentNode.insertBefore(t, n);
+              analytics._loadOptions = e;
+            };
+            analytics._writeKey = "Yhppg7GRbCW2jQ27Pu4EzvIxDTMqH2J0";
+            analytics.SNIPPET_VERSION = "4.15.2";
+            analytics.load("Yhppg7GRbCW2jQ27Pu4EzvIxDTMqH2J0");
+            analytics.page();
+          }
+      })();
+
+      analytics.identify("segmwebuser1", {
+        name: "Segment MWeb User 1",
+        email: "segmwebuser1@test.com",
+      });
+
+      analytics.track("Segment Web Event", {
+        plan: "Enterprise",
+      });
+    </script> -->
+  </head>
+  <body>
+    <!-- <script>
+      clevertap.notificationCallback = function (msg) {
+        console.log("Entered Callback+================================+");
+        console.log(JSON.stringify(msg)); //your custom rendering implementation here
+      };
+    </script> -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <!-- <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MQ89K3M"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      >
+      </iframe>
+    </noscript> -->
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>Web SDK Integration Test!</h1>
+
+    <!-- Web Native Display  -->
+    <div id="slider">
+      <div class="slides">
+        <img
+          id="item1"
+          src="https://i.pinimg.com/originals/2b/de/de/2bdede0647e3cdf75b44ea33723201d9.jpg"
+          width="100%"
+        />
+      </div>
+
+      <div class="slides">
+        <img
+          id="item2"
+          src="https://images6.alphacoders.com/462/thumb-1920-462371.jpg"
+          width="100%"
+        />
+      </div>
+
+      <div class="slides">
+        <img
+          id="item3"
+          src="https://wallpaperaccess.com/full/1154341.jpg"
+          width="100%"
+        />
+      </div>
+
+      <div id="dot">
+        <span class="dot"></span>
+        <span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("CT_web_native_display", function (event) {
+        console.log("Inside ND listener: ", event);
+        const data = event.detail;
+        // renderCartDropOffPersonalisationCampaign(data);
+      });
+
+      function renderCartDropOffPersonalisationCampaign(data) {
+        const mytopic = data.kv.topic;
+        const url1 = data.kv.Item1_Img;
+        const url2 = data.kv.item2_Img;
+        const url3 = data.kv.item3_Img;
+        console.log("Inside renderCartDropOffPersonalisationCampaign: ", event);
+        console.log("url1: ", url1);
+        console.log("url2: ", url2);
+        console.log("url3: ", url3);
+
+        const cart_items_string = data.kv.cart_items_string;
+        var str_array = cart_items_string.split(",");
+        console.log("cart_items_string:", cart_items_string);
+        for (var i = 0; i < str_array.length; i++) {
+          console.log(
+            "cart_items_string_splited_" + (i + 1) + ":",
+            str_array[i]
+          );
+        }
+
+        const carouselinner = document.getElementById("carousel-inner");
+        document.getElementById("item1").src = url1;
+        document.getElementById("item2").src = url2;
+        document.getElementById("item3").src = url3;
+        clevertap.renderNotificationViewed(data);
+        carouselinner.addEventListener("click", () => {
+          clevertap.renderNotificationClicked(data);
+        });
+      }
+    </script>
+
+    <!-- Retreiving user property from the profile -->
+    <script>
+      console.log("This is test");
+      let user_prop = clevertap.profile.getAttribute("addToCartItems");
+      let user_prop2 = clevertap.profile.getAttribute("get-attr_test");
+      console.log("User Property: " + user_prop);
+      console.log("get-attr_test_User Property2: " + user_prop2);
+    </script>
+
+    <!-- onUserLogin -->
+    <script src="scripts.js"></script>
+
+    <input id="name" type="text" name="username" placeholder="Name" />
+    <br /><br />
+    <input id="emailid" type="text" name="username" placeholder="Email ID" />
+    <br /><br />
+    <input id="identity" type="text" name="username" placeholder="Identity" />
+    <br /><br />
+    <input id="mobno" type="text" name="username" placeholder="Mobile Number" />
+    <br /><br />
+    <div class="snackbar" id="sb6">Logged In!</div>
+    <button id="login" onclick="loginUser()">Login</button>
+    <br /><br />
+
+    <!-- event -->
+    <input
+      id="eventName"
+      type="text"
+      name="username"
+      placeholder="Event Name"
+    />
+    <br /><br />
+    <button id="event" onclick="pushEvent()">Push Event</button>
+    <div class="snackbar" id="sb1">Push Event Clicked!</div>
+    <script>
+      let pushEvent = () => {
+        clevertap.event.push(document.getElementById("eventName").value);
+        //snackbar
+        var x = document.getElementById("sb1");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- key/value events -->
+    <br /><br />
+    <button id="events" onclick="events()">Key/Value Push Event</button>
+    <div class="snackbar" id="sb2">Key/Value Push Event Clicked!</div>
+    <script>
+      let events = () => {
+        /*clevertap.event.push("Product Viewed", {
+          "Product name": "Casio Chronograph Watch",
+          Category: "Mens Accessories",
+          Price: 59.99,
+        });*/
+        clevertap.event.push("Added to Cart", {
+          product_name:
+            "Gucci Guccissima Canvas Horsebit Peep Toe Platform Pumps Size 36.5",
+          product_url:
+            "us-en/women/bottega-veneta-chocolate-brown-leather-boston-bag-p718",
+          product_id: 718,
+          product_price: 154.6,
+          product_brand: "Gucci",
+          product_category: "Pumps",
+          product_varaint: "Beige",
+          product_qty: 1,
+          product_image:
+            "https://cdn.theluxurycloset.com/uploads/products/full/gucci-guccissima-canvas-platform-pumps-lc-119596-395883-25449.jpg",
+          product_original_price: 10.45555,
+          product_web_link:
+            "http://198.211.119.79/lykan/web/women/gucci-guccissima-canvas-horsebit-peep-toe-platform-pumps-size-365-p718",
+          show_discount: true,
+        });
+        //snackbar
+        var x = document.getElementById("sb2");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show1", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- profile push  -->
+    <br /><br />
+    <button id="profilepush" onclick="profilePush()">Profile Push</button>
+    <div class="snackbar" id="sb3">Profile Push Clicked!</div>
+    <script>
+      let profilePush = () => {
+        clevertap.profile.push({
+          Site: {
+            Name: document.getElementById("name").value,
+            Identity: document.getElementById("identity").value,
+            Email: document.getElementById("emailid").value,
+            Phone: document.getElementById("mobno").value,
+            "Customer Type": "Gold",
+            "MSG-email": true,
+            "MSG-push": true,
+            "MSG-sms": true,
+            "MSG-whatsapp": true,
+          },
+        });
+        clevertap.profile.setMultiValuesForKey(
+          "product_id",
+          [16470009, 12570060, 12570008004]
+        );
+
+        //   //snackbar
+        //   var x = document.getElementById("sb3");
+        //   x.classList.add("show");
+        //   setTimeout(function () {
+        //     x.className = x.className.replace("show", "");
+        //   }, 3000);
+      };
+
+      let setMultiValuesForKey = (key, value) => {
+        clevertap.profile.push({
+          Site: {
+            key: value,
+          },
+        });
+        //snackbar
+        var x = document.getElementById("sb3");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- send notification event -->
+    <br /><br />
+    <button id="event" onclick="webNotiEvent()">Send Notification</button>
+    <div class="snackbar" id="sb4">Send Notification Button Clicked!</div>
+    <script>
+      let webNotiEvent = () => {
+        clevertap.event.push("Karthik's web noti event");
+        //snackbar
+        var x = document.getElementById("sb4");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- send popup -->
+    <br /><br />
+    <button id="event" onclick="webPopupEvent()">Send Popup</button>
+    <div class="snackbar" id="sb5">Send Pop up Button Clicked!</div>
+    <script>
+      let webPopupEvent = () => {
+        clevertap.event.push("Karthik's web popup event");
+        //snackbar
+        var x = document.getElementById("sb5");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- Notification Push javascript file -->
+    <!--     <script data-main="config/config" src="/notificationPush.js"></script> -->
+    <script src="notificationPush.js"></script>
+
+    <!-- Hard Popup Button -->
+    <!-- <br /><br />
+    <button id="testBtn" onclick="testButton()">Hard Popup Button</button>
+    <div class="snackbar" id="sb7">Hard Popup Button Clicked!</div>
+    <script>
+      let testButton = () => {
+        Notification.requestPermission().then(function (getperm) {
+          console.log("Hard Popup Permission granted", getperm);
+          window.location.reload();
+        });
+      };
+      //snackbar
+      var x = document.getElementById("sb7");
+      x.classList.add("show");
+      setTimeout(function () {
+        x.className = x.className.replace("show1", "");
+      }, 3000);
+    </script> -->
+
+    <!-- Cart -->
+    <br /><br />
+    <input
+      id="cartItemCount"
+      type="text"
+      name="username"
+      placeholder="Cart Item Count"
+    />
+    <br /><br />
+    <input
+      id="productName"
+      type="text"
+      name="username"
+      placeholder="Product Name"
+    />
+    <br /><br />
+    <input
+      id="productPrice"
+      type="text"
+      name="username"
+      placeholder="Product Price"
+    />
+    <br /><br />
+    <input
+      id="productID"
+      type="text"
+      name="username"
+      placeholder="Product ID"
+    />
+    <br /><br />
+    <input
+      id="productQuantity"
+      type="text"
+      name="username"
+      placeholder="Product Quantity"
+    />
+    <br /><br />
+    <input
+      id="productImage"
+      type="text"
+      name="username"
+      placeholder="Product Image"
+    />
+    <br /><br />
+    <button id="addToCart" onclick="addToCart()">Add to Cart</button>
+    <br /><br />
+    <div class="snackbar" id="sb8">Added to Cart!</div>
+    <script language="JavaScript">
+      const user_property_arr = [1, 2, 3];
+      let addToCart = () => {
+        var pd_id = document.getElementById("productID").value;
+        // user_property_arr.push(pd_id);
+        // console.log("Arrray: " + user_property_arr);
+        // let rev_arr = user_property_arr.reverse();
+        // console.log("RevArray: " + rev_arr);
+        let unshift_arr = user_property_arr.unshift(pd_id);
+        console.log("UNshiftArr: " + user_property_arr.unshift(pd_id));
+        //snackbar
+        var x = document.getElementById("sb8");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- redirection -->
+    <br /><br />
+    <a href="./test.html">TEST 1</a>
+    <br /><br />
+    <a href="./test2.html">TEST 2</a>
+
+    <br /><br />
+    <button id="event" onclick="testArray()">Test Array</button>
+    <div class="snackbar" id="sb9">Send Notification Button Clicked!</div>
+    <script>
+      let testArray = () => {
+        clevertap.addMultiValuesForKey("KeyArray", ["ValueArray1"]);
+        //snackbar
+        var x = document.getElementById("sb9");
+        x.classList.add("show");
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      };
+    </script>
+
+    <!-- script for web native display  -->
+    <script>
+      var index = 0;
+      var slides = document.querySelectorAll(".slides");
+      var dot = document.querySelectorAll(".dot");
+
+      function changeSlide() {
+        if (index < 0) {
+          index = slides.length - 1;
+        }
+
+        if (index > slides.length - 1) {
+          index = 0;
+        }
+
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+          dot[i].classList.remove("active");
+        }
+
+        slides[index].style.display = "block";
+        dot[index].classList.add("active");
+
+        index++;
+
+        setTimeout(changeSlide, 4000);
+      }
+
+      changeSlide();
+    </script>
+  </body>
+</html>
