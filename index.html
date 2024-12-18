@@ -417,28 +417,42 @@
       };
     </script>
 
-    <!-- Notification Push javascript file -->
-    <!--     <script data-main="config/config" src="/notificationPush.js"></script> -->
-    <script src="notificationPush.js"></script>
+  <script>
+  // Function to show the custom pop-up
+  function showCustomPopup() {
+    const userConsent = confirm("Do you allow notifications?"); // Replace with a styled custom pop-up if needed
+    if (userConsent) {
+      requestCleverTapPermission();
+    } else {
+      console.log("User denied custom notification permission.");
+    }
+  }
 
-    <!-- Hard Popup Button -->
-    <!-- <br /><br />
-    <button id="testBtn" onclick="testButton()">Hard Popup Button</button>
-    <div class="snackbar" id="sb7">Hard Popup Button Clicked!</div>
-    <script>
-      let testButton = () => {
-        Notification.requestPermission().then(function (getperm) {
-          console.log("Hard Popup Permission granted", getperm);
-          window.location.reload();
+  // Function to trigger CleverTap permission request
+  function requestCleverTapPermission() {
+    Notification.requestPermission().then(function (getperm) {
+      if (getperm === "granted") {
+        console.log("CleverTap Notification Permission granted:", getperm);
+        clevertap.notifications.push({
+          "titleText": "Notification Permissions",
+          "bodyText": "Allow notifications to stay updated.",
+          "okButtonText": "Allow",
+          "rejectButtonText": "No thanks",
+          "askAgainTimeInSeconds": 5,
         });
-      };
-      //snackbar
-      var x = document.getElementById("sb7");
-      x.classList.add("show");
-      setTimeout(function () {
-        x.className = x.className.replace("show1", "");
-      }, 3000);
-    </script> -->
+      } else {
+        console.log("CleverTap Notification Permission denied:", getperm);
+      }
+    });
+  }
+
+  // Initialize custom pop-up first
+  window.onload = function () {
+    showCustomPopup();
+  };
+</script>
+
+   
 
     <!-- Cart -->
     <br /><br />
